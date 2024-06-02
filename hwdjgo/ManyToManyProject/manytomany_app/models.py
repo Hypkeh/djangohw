@@ -4,7 +4,9 @@ from django.db import models
 class Student(models.Model):
     name =models.CharField(max_length=30)
     age = models.IntegerField()
-    courses = models.ForeignKey('Course', on_delete=models.CASCADE)
+    courses = models.ManyToManyField('Course', on_delete=models.CASCADE)
 
 class Course(models.Model):
-    name = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
+    description = models.TextField()
+    students = models.ManyToManyField(Student, on_delete=models.CASCADE)
